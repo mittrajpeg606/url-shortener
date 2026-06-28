@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:8181/api/v1/urls";
+const API_BASE_URL = "https://url-shortener-w5f1.onrender.com/api/v1/urls/";
 
 const shortenButton = document.getElementById("shortenBtn");
 const copyButton = document.getElementById("copyBtn");
