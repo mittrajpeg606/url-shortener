@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>URL Analytics</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
+    <link rel="manifest" href="site.webmanifest" />
+  </head>
+
+  <body>
+    <div class="container py-5">
+      <div class="row justify-content-center">
+        <div class="col-xl-8 col-lg-9 col-md-10">
+          <div class="card shadow-lg border-0">
+            <div class="card-header hero-header text-center text-white">
+              <span class="badge bg-light text-dark px-3 py-2 mb-3">
+                Spring Boot Backend Project
+              </span>
+
+              <h1 class="display-5 fw-bold">
+                <i class="bi bi-bar-chart-fill"></i>
+
+                URL Analytics
+              </h1>
+
+              <p class="lead mb-4">
+                View click statistics, URL details and access history.
+              </p>
+
+              <div class="row text-center">
+                <div class="col-4">
+                  <h4>Redis</h4>
+
+                  <small>Cached</small>
+                </div>
+
+                <div class="col-4">
+                  <h4>Real Time</h4>
+
+                  <small>Analytics</small>
+                </div>
+
+                <div class="col-4">
+                  <h4>REST</h4>
+
+                  <small>API</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body p-4">
+              <div class="mb-4">
+                <label class="form-label fw-semibold"> Short Code </label>
+
+                <div class="input-group">
+                  <span class="input-group-text">
+                    <i class="bi bi-link-45deg"></i>
+                  </span>
+
+                  <input
+                    id="shortCode"
+                    class="form-control form-control-lg"
+                    placeholder="Enter Short Code"
+                  />
+                </div>
+              </div>
+
+              <div class="text-center mb-4">
+                <span class="badge bg-primary"> 📊 Analytics </span>
+
+                <span class="badge bg-success"> 🚀 Redis Cache </span>
+
+                <span class="badge bg-warning text-dark"> ⚡ Fast Lookup </span>
+
+                <span class="badge bg-danger"> 🛡 Secure </span>
+              </div>
+
+              <div class="d-grid">
+                <button id="fetchAnalyticsBtn" class="btn btn-primary btn-lg">
+                  <i class="bi bi-search"></i>
+
+                  Fetch Analytics
+                </button>
+              </div>
+
+              <div id="loading" class="text-center mt-4 d-none">
+                <div class="spinner-border text-primary"></div>
+
+                <p class="mt-3">Fetching analytics...</p>
+              </div>
+
+              <hr class="my-5" />
+
+              <div id="analyticsCard" class="card border-success d-none">
+                <div class="card-header bg-success text-white">
+                  <i class="bi bi-check-circle-fill"></i>
+
+                  Analytics Details
+                </div>
+
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label fw-bold"> Original URL </label>
+
+                      <div id="originalUrl" class="info-box"></div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label fw-bold"> Short URL </label>
+
+                      <div class="info-box">
+                        <a id="shortUrl" target="_blank"> </a>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label fw-bold"> Click Count </label>
+
+                      <div id="clickCount" class="info-box"></div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label fw-bold"> Created At </label>
+
+                      <div id="createdAt" class="info-box"></div>
+                    </div>
+
+                    <div class="col-12 mb-3">
+                      <label class="form-label fw-bold"> Last Accessed </label>
+
+                      <div id="lastAccessedAt" class="info-box"></div>
+                    </div>
+                  </div>
+
+                  <div class="row g-2 mt-2">
+                    <div class="col-md-6">
+                      <button
+                        id="openShortUrlBtn"
+                        class="btn btn-success w-100 d-none"
+                      >
+                        <i class="bi bi-box-arrow-up-right"></i>
+
+                        Open Short URL
+                      </button>
+                    </div>
+
+                    <div class="col-md-6">
+                      <button
+                        onclick="
+                          navigator.clipboard.writeText(
+                            document.getElementById('shortUrl').innerText,
+                          )
+                        "
+                        id="copyShortUrlBtn"
+                        class="btn btn-primary w-100"
+                      >
+                        <i class="bi bi-copy"></i>
+
+                        Copy Short URL
+                      </button>
+                    </div>
+
+                    <div class="col-md-6">
+                      <a href="index.html" class="btn btn-dark w-100">
+                        <i class="bi bi-arrow-left-circle"></i>
+
+                        URL Shortener
+                      </a>
+                    </div>
+
+                    <div class="col-md-6">
+                      <a
+                        href="landing.html"
+                        class="btn btn-outline-primary w-100"
+                      >
+                        <i class="bi bi-house-fill"></i>
+
+                        Home
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="errorCard" class="alert alert-danger mt-4 d-none"></div>
+            </div>
+          </div>
+
+          <div class="text-center mt-4">
+            <h6 class="mb-3">Powered By</h6>
+
+            <div class="mb-3">
+              <span class="badge bg-success"> Spring Boot </span>
+
+              <span class="badge bg-danger"> Redis </span>
+
+              <span class="badge bg-primary"> MySQL </span>
+
+              <span class="badge bg-dark"> Bootstrap </span>
+
+              <span class="badge bg-secondary"> Docker </span>
+
+              <span class="badge bg-warning text-dark"> JUnit 5 </span>
+
+              <span class="badge bg-info text-dark"> Mockito </span>
+            </div>
+
+            <hr class="my-4" />
+
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+              <a href="landing.html" class="btn btn-outline-primary">
+                <i class="bi bi-house-fill"></i>
+
+                Home
+              </a>
+
+              <a href="index.html" class="btn btn-outline-dark">
+                <i class="bi bi-link-45deg"></i>
+
+                Shortener
+              </a>
+
+              <a
+                href="https://github.com/mittrajpeg606"
+                class="btn btn-outline-secondary"
+              >
+                <i class="bi bi-github"></i>
+
+                GitHub
+              </a>
+            </div>
+
+            <p class="text-muted mt-4 mb-0">
+              Made with ❤️ by Priyaanshu Mittra
+            </p>
+
+            <small class="text-muted">
+              URL Shortener • Analytics Dashboard • Spring Boot Project
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script src="js/analytics.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
+```

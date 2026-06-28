@@ -1,0 +1,21 @@
+# Maven
+backend/target/
+
+# Eclipse / STS
+backend/.classpath
+backend/.project
+backend/.settings/
+
+# IntelliJ
+.idea/
+*.iml
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
