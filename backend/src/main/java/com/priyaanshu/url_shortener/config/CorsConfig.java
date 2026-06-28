@@ -16,6 +16,7 @@ public class CorsConfig {
 
         configuration.addAllowedOrigin("http://localhost:5500");
         configuration.addAllowedOrigin("http://127.0.0.1:5500");
+        configuration.addAllowedOrigin("https://url-shortener-priyaanshu-mittra.netlify.app/");
 
         configuration.addAllowedMethod("*");
 
